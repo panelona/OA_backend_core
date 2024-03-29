@@ -1,0 +1,33 @@
+name: Apply migrations
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+jobs:
+  run-tests:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 8.0.x
+        env:
+          ASPNETCORE_ENVIRONMENT: Development
+          AppConfig__ConnectionString: ${{secrets.CONNECTION_STRING}}
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
+      - name: Test with coverage
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+      - name: Code Coverage Summary
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: '**/coverage.cobertura.xml'
+          fail_below_min: true
+          format: 'markdown'
+          thresholds: '80 100'
