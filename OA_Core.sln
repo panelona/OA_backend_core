@@ -25,6 +25,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{F422EC
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github", "Github", "{5A854A43-3E72-4798-B6A9-66CD00F50C0D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\.gitkeep = .github\.gitkeep
+		.github\CODEOWNERS = .github\CODEOWNERS
+		.github\workflows\deploy_dev.yml = .github\workflows\deploy_dev.yml
+		.github\pull_request_template.md = .github\pull_request_template.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +65,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F422EC2A-4686-4B63-A5DA-D07B983DC45D} = {5CB3DFB2-8A01-4259-B604-E079BE6C9F3E}
+		{5A854A43-3E72-4798-B6A9-66CD00F50C0D} = {5CB3DFB2-8A01-4259-B604-E079BE6C9F3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7524BF37-1C17-471D-847B-DA154D162238}
