@@ -1,20 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
-using OA_Core.Domain.Interfaces.Service;
-using static System.Net.Mime.MediaTypeNames;
-using System.IO;
+using Microsoft.Extensions.Hosting;
 using OA_Core.Domain.Enums;
-using OA_Core.Domain.Interfaces.Notifications;
 using OA_Core.Domain.Exceptions;
+using OA_Core.Domain.Interfaces.Service;
 
 namespace OA_Core.Service
 {
 	public class ImagemService : IImagemService
 	{
-		private readonly IHostingEnvironment _environment;
+		private readonly IHostEnvironment _environment;
 		private readonly string _imageFolderPath;
 
-		public ImagemService(IHostingEnvironment environment)
+		public ImagemService(IHostEnvironment environment)
 		{
 			_environment = environment;
 			_imageFolderPath = Path.Combine(_environment.ContentRootPath, "images");

@@ -1,16 +1,10 @@
 ﻿using FluentAssertions;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using NSubstitute;
 using OA_Core.Domain.Enums;
 using OA_Core.Domain.Exceptions;
-using OA_Core.Domain.Interfaces.Service;
 using OA_Core.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OA_Core.Tests.Service
 {
@@ -22,8 +16,8 @@ namespace OA_Core.Tests.Service
 		public async Task SaveImageAsync_ValidFile_ReturnsFilePath()
 		{
 			// Arrange
-			var hostingEnvironment = Substitute.For<IHostingEnvironment>();
-			hostingEnvironment.ContentRootPath.Returns("mocked_content_root_path");
+			var hostEnvironment = Substitute.For<IHostEnvironment>();
+			hostEnvironment.ContentRootPath.Returns("mocked_content_root_path");
 
 			var formFile = Substitute.For<IFormFile>();
 			formFile.Length.Returns(100); // Set a valid file length
@@ -32,7 +26,7 @@ namespace OA_Core.Tests.Service
 
 			var tipoimagem = TipoImagem.fotoOutro;
 
-			var imagemService = new ImagemService(hostingEnvironment);
+			var imagemService = new ImagemService(hostEnvironment);
 
 			// Act
 			var result = await imagemService.SalvarImagemAsync(formFile, tipoimagem);
@@ -48,7 +42,7 @@ namespace OA_Core.Tests.Service
 		public async Task SaveImageAsync_InvalidByteFile_ThrowsException()
 		{
 			// Arrange
-			var hostingEnvironment = Substitute.For<IHostingEnvironment>();
+			var hostingEnvironment = Substitute.For<IHostEnvironment>();
 			hostingEnvironment.ContentRootPath.Returns("your_mocked_content_root_path");
 
 			var formFile = Substitute.For<IFormFile>();
@@ -68,7 +62,7 @@ namespace OA_Core.Tests.Service
 		public async Task SaveImageAsync_InvalidFormatFile_ThrowsException()
 		{
 			// Arrange
-			var hostingEnvironment = Substitute.For<IHostingEnvironment>();
+			var hostingEnvironment = Substitute.For<IHostEnvironment>();
 			hostingEnvironment.ContentRootPath.Returns("your_mocked_content_root_path");
 
 			var formFile = Substitute.For<IFormFile>();
@@ -88,7 +82,7 @@ namespace OA_Core.Tests.Service
 		public async Task SaveImageAsync_NullFile_ThrowsException()
 		{
 			// Arrange
-			var hostingEnvironment = Substitute.For<IHostingEnvironment>();
+			var hostingEnvironment = Substitute.For<IHostEnvironment>();
 			hostingEnvironment.ContentRootPath.Returns("your_mocked_content_root_path");
 
 			IFormFile form = null;
