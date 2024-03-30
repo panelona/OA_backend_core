@@ -1,7 +1,8 @@
-name: Apply Staging
+name: Push para Features
 on:
   push:
-    branches: [staging]
+    branches:
+      - 'feat/**'
   workflow_dispatch:
 jobs:
   run-tests:
@@ -15,7 +16,6 @@ jobs:
           dotnet-version: 8.0.x
         env:
           ASPNETCORE_ENVIRONMENT: Development
-          AppConfig__ConnectionString: ${{secrets.CONNECTION_STRING}}
       - name: Restore dependencies
         run: dotnet restore
       - name: Build

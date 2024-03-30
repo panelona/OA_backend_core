@@ -1,4 +1,4 @@
-name: Apply migrations
+name: Apply dev
 on:
   push:
     branches: [develop]
