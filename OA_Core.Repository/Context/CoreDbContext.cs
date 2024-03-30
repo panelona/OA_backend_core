@@ -1,16 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OA_Core.Domain.Entities;
 using OA_Core.Repository.Mappings;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Repository.Context
 {
-    public class CoreDbContext : DbContext
-    {
-        public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<Professor> Professor { get; set; }
-        public DbSet<Curso> Curso { get; set; }
-        public DbSet<Aluno> Aluno { get; set; }
-        public DbSet<Aula> Aula { get; set; }
+	[ExcludeFromCodeCoverage]
+	public class CoreDbContext : DbContext
+	{
+		public DbSet<Usuario> Usuario { get; set; }
+		public DbSet<Professor> Professor { get; set; }
+		public DbSet<Curso> Curso { get; set; }
+		public DbSet<Aluno> Aluno { get; set; }
+		public DbSet<Aula> Aula { get; set; }
 		public DbSet<Assinatura> Assinatura { get; set; }
 		public DbSet<CursoProfessor> CursoProfessor { get; set; }
 		public DbSet<UsuarioCurso> UsuarioCurso { get; set; }
@@ -18,11 +20,11 @@ namespace OA_Core.Repository.Context
 		public DbSet<AvaliacaoUsuario> AvaliacaoUsuario { get; set; }
 
 		public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
-        {
-        }
+		{
+		}
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
 			modelBuilder.Entity<Usuario>(new UsuarioEntityMap().Configure);
 			modelBuilder.Entity<Professor>(new ProfessorEntityMap().Configure);
 			modelBuilder.Entity<Curso>(new CursoEntityMap().Configure);

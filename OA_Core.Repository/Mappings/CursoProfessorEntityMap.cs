@@ -1,13 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OA_Core.Domain.Entities;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Repository.Mappings
 {
+	[ExcludeFromCodeCoverage]
 	public class CursoProfessorEntityMap
-    {
-        public void Configure(EntityTypeBuilder<CursoProfessor> builder)
-        {
+	{
+		public void Configure(EntityTypeBuilder<CursoProfessor> builder)
+		{
 			//Ignora prop de validação
 			builder.Ignore(a => a.Valid).Ignore(a => a.ValidationResult);
 

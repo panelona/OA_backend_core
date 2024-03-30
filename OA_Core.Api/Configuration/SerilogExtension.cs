@@ -1,11 +1,13 @@
 ﻿using Serilog;
 using Serilog.Events;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Api.Configuration
 {
+	[ExcludeFromCodeCoverage]
 	public static class SerilogExtension
 	{
-		public static void AddSerilogApi(WebApplicationBuilder builder) 
+		public static void AddSerilogApi(WebApplicationBuilder builder)
 		{
 			Log.Logger = new LoggerConfiguration()
 				.MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)

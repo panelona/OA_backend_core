@@ -1,19 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OA_Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Repository.Mappings
 {
-    public class CursoEntityMap
-    {
-        public void Configure(EntityTypeBuilder<Curso> builder)
-        {
+	[ExcludeFromCodeCoverage]
+	public class CursoEntityMap
+	{
+		public void Configure(EntityTypeBuilder<Curso> builder)
+		{
 			//Ignora prop de validação
 			builder.Ignore(c => c.Valid).Ignore(c => c.ValidationResult);
 
@@ -23,7 +18,7 @@ namespace OA_Core.Repository.Mappings
 			//Mapeamento de relações
 			builder.HasOne(c => c.Professor)
 				.WithMany()
-				.HasForeignKey(c => c.ProfessorId);		
+				.HasForeignKey(c => c.ProfessorId);
 		}
 	}
 }

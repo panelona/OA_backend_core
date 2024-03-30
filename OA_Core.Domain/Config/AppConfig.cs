@@ -1,7 +1,10 @@
-﻿namespace OA_Core.Domain.Config
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace OA_Core.Domain.Config
 {
-    public class AppConfig
-    {
-        public string ConnectionString { get; set; }
-    }
+	[ExcludeFromCodeCoverage]
+	public class AppConfig
+	{
+		public string ConnectionString { get; set; } = string.Empty;
+	}
 }

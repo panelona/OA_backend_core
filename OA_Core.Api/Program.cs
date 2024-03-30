@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
 using OA_Core.Api.Configuration;
 using OA_Core.Api.Filters;
@@ -10,7 +9,6 @@ using OA_Core.Domain.Notifications;
 using OA_Core.Repository.Context;
 using OA_Core.Repository.Repositories;
 using OA_Core.Service;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +38,7 @@ builder.Services.AddSingleton(appConfig);
 
 builder.Services.AddDbContext<CoreDbContext>(options =>
 {
-    options.UseMySql(appConfig.ConnectionString, ServerVersion.AutoDetect(appConfig.ConnectionString),
+	options.UseMySql(appConfig.ConnectionString, ServerVersion.AutoDetect(appConfig.ConnectionString),
 		mysqlOptions => mysqlOptions.EnableRetryOnFailure());
 });
 
@@ -88,8 +86,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 app.UseStaticFiles();
 

@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OA_Core.Domain.Entities;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Repository.Mappings
 {
+	[ExcludeFromCodeCoverage]
 	public class ProfessorEntityMap
 	{
 		public void Configure(EntityTypeBuilder<Professor> builder)
