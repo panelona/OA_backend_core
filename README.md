@@ -25,4 +25,4 @@ Para evitar problemas no deploy o lint irá verificar se alguns dados estão hardc
   }
 ```
 
-A string acima é a padrão para a conexão com o docker.
+A string acima é a padrão para a conexão com o docker apenas para ambiente de desenvolvimento.
