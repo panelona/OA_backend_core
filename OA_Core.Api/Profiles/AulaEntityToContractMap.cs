@@ -5,13 +5,13 @@ using OA_Core.Domain.Entities;
 
 namespace OA_Core.Api.Profiles
 {
-    public class AulaEntityToContractMap : Profile
-    {
-        public AulaEntityToContractMap()
-        {
-            CreateMap<Aula, AulaRequest>().ReverseMap();
+	public class AulaEntityToContractMap : Profile
+	{
+		public AulaEntityToContractMap()
+		{
+			CreateMap<Aula, AulaRequest>().ReverseMap();
 			CreateMap<Aula, AulaResponse>().ReverseMap();
-            CreateMap<Aula, AulaRequestPut>().ReverseMap();
+			CreateMap<Aula, AulaRequestPut>().ReverseMap();
 
 			CreateMap<AulaOnline, AulaRequest>().ReverseMap();
 			CreateMap<AulaVideo, AulaRequest>().ReverseMap();
@@ -33,5 +33,5 @@ namespace OA_Core.Api.Profiles
 			CreateMap<AulaTexto, AulaRequestPut>().ReverseMap();
 			CreateMap<AulaDownload, AulaRequestPut>().ReverseMap();
 		}
-    }
+	}
 }

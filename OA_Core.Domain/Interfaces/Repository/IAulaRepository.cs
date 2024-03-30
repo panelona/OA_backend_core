@@ -1,10 +1,8 @@
-﻿using OA_Core.Domain.Contracts.Response;
-using OA_Core.Domain.Entities;
-using System.Linq.Expressions;
+﻿using OA_Core.Domain.Entities;
 
 namespace OA_Core.Domain.Interfaces.Repository
 {
-    public interface IAulaRepository : IBaseRepository<Aula>
-    {
+	public interface IAulaRepository : IBaseRepository<Aula>
+	{
 	}
 }

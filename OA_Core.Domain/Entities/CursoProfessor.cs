@@ -1,10 +1,4 @@
 ﻿using OA_Core.Domain.Validations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OA_Core.Domain.Entities
 {

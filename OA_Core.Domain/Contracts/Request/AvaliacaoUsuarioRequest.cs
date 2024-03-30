@@ -2,8 +2,8 @@
 {
 	public class AvaliacaoUsuarioRequest
 	{
-		public Guid AvaliacaoId { get; set; }	
-		public Guid UsuarioId { get; set; }	
-	
+		public Guid AvaliacaoId { get; set; }
+		public Guid UsuarioId { get; set; }
+
 	}
 }

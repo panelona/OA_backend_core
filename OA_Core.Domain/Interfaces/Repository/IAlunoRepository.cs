@@ -3,7 +3,7 @@
 
 namespace OA_Core.Domain.Interfaces.Repository
 {
-    public interface IAlunoRepository : IBaseRepository<Aluno>
-    {
+	public interface IAlunoRepository : IBaseRepository<Aluno>
+	{
 	}
 }

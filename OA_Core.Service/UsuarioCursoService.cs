@@ -10,23 +10,23 @@ using OA_Core.Domain.Interfaces.Service;
 
 namespace OA_Core.Service
 {
-    public class UsuarioCursoService : IUsuarioCursoService
-    {
-        private readonly IMapper _mapper;
-        private readonly IUsuarioCursoRepository _usuarioCursoRepository;
-        private readonly IUsuarioRepository _usuarioRepository;
+	public class UsuarioCursoService : IUsuarioCursoService
+	{
+		private readonly IMapper _mapper;
+		private readonly IUsuarioCursoRepository _usuarioCursoRepository;
+		private readonly IUsuarioRepository _usuarioRepository;
 		private readonly ICursoRepository _cursoRepository;
 
 		private readonly INotificador _notificador;
 
-        public UsuarioCursoService(IMapper mapper, IUsuarioCursoRepository usuarioCursoRepository, IUsuarioRepository usuarioRepository, ICursoRepository cursoRepository, INotificador notificador)
-        {
-            _mapper = mapper;
-            _usuarioCursoRepository = usuarioCursoRepository;
-            _usuarioRepository = usuarioRepository;
+		public UsuarioCursoService(IMapper mapper, IUsuarioCursoRepository usuarioCursoRepository, IUsuarioRepository usuarioRepository, ICursoRepository cursoRepository, INotificador notificador)
+		{
+			_mapper = mapper;
+			_usuarioCursoRepository = usuarioCursoRepository;
+			_usuarioRepository = usuarioRepository;
 			_cursoRepository = cursoRepository;
-            _notificador = notificador;
-        }
+			_notificador = notificador;
+		}
 
 
 		//retorna uma lista dos cursos que ele está inscrito, com o status e o progresso de cada um, exibindo o progresso como porcentagem.
@@ -62,11 +62,11 @@ namespace OA_Core.Service
 		}
 
 		public async Task<Guid> CadastrarUsuarioACursoAsync(UsuarioCursoRequest usuarioCursoRequest)
-        {
-            var entity = _mapper.Map<UsuarioCurso>(usuarioCursoRequest);
+		{
+			var entity = _mapper.Map<UsuarioCurso>(usuarioCursoRequest);
 
 			if (await _usuarioRepository.ObterPorIdAsync(entity.UsuarioId) is null)
-                throw new InformacaoException(StatusException.NaoEncontrado, $"Usuario: {entity.UsuarioId} inválido ou não existente");
+				throw new InformacaoException(StatusException.NaoEncontrado, $"Usuario: {entity.UsuarioId} inválido ou não existente");
 			if (await _cursoRepository.ObterPorIdAsync(entity.CursoId) is null)
 				throw new InformacaoException(StatusException.NaoEncontrado, $"Curso: {entity.CursoId} inválido ou não existente");
 
@@ -75,10 +75,10 @@ namespace OA_Core.Service
 
 			if (!entity.Valid)
 				throw new InformacaoException(StatusException.FormatoIncorreto, $"{entity.ValidationResult}");
-         
-            await _usuarioCursoRepository.AdicionarAsync(entity);
-            return entity.Id;
-        }
 
-    }
+			await _usuarioCursoRepository.AdicionarAsync(entity);
+			return entity.Id;
+		}
+
+	}
 }

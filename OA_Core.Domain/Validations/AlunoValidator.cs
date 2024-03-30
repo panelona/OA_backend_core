@@ -1,17 +1,12 @@
 ﻿using FluentValidation;
 using OA_Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OA_Core.Domain.Validations
 {
-    public class AlunoValidator : AbstractValidator<Aluno>
-    {
-        public AlunoValidator()
-        {
+	public class AlunoValidator : AbstractValidator<Aluno>
+	{
+		public AlunoValidator()
+		{
 
 			RuleFor(a => a.Foto)
 				.NotEmpty()
@@ -21,5 +16,5 @@ namespace OA_Core.Domain.Validations
 				.NotEmpty()
 				.WithMessage("Cpf é obrigatório");
 		}
-    }
+	}
 }

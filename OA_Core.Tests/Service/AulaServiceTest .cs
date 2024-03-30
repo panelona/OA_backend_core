@@ -9,8 +9,6 @@ using OA_Core.Domain.Enums;
 using OA_Core.Domain.Exceptions;
 using OA_Core.Domain.Interfaces.Notifications;
 using OA_Core.Domain.Interfaces.Repository;
-using OA_Core.Domain.Interfaces.Service;
-using OA_Core.Domain.Notifications;
 using OA_Core.Service;
 using OA_Core.Tests.Config;
 using System.Linq.Expressions;
@@ -18,45 +16,45 @@ using System.Linq.Expressions;
 namespace OA_Core.Tests.Service
 {
 	[Trait("Service", "Aula Service")]
-    public class AulaServiceTest
-    {
-        private readonly IMapper _mapper;
-        private readonly Fixture _fixture;
-        private readonly INotificador _notifier;
+	public class AulaServiceTest
+	{
+		private readonly IMapper _mapper;
+		private readonly Fixture _fixture;
+		private readonly INotificador _notifier;
 		private readonly IAulaRepository _aulaRepository;
 		private readonly ICursoRepository _cursoRepository;
 		private readonly AulaService _aulaService;
 
 
 		public AulaServiceTest()
-        {
-            _fixture = FixtureConfig.GetFixture();
-            _mapper = MapperConfig.Get();
-            _notifier = Substitute.For<INotificador>();
+		{
+			_fixture = FixtureConfig.GetFixture();
+			_mapper = MapperConfig.Get();
+			_notifier = Substitute.For<INotificador>();
 			_aulaRepository = Substitute.For<IAulaRepository>();
 			_cursoRepository = Substitute.For<ICursoRepository>();
 			_aulaService = new AulaService(_mapper, _aulaRepository, _cursoRepository, _notifier);
 		}
 
 		[Fact(DisplayName = "Cria uma Aula válida")]
-        public async Task AulaService_CriaAula_DeveCriar()
-        {
+		public async Task AulaService_CriaAula_DeveCriar()
+		{
 			//Arrange            
-            var professor = _fixture.Create<Curso>();
-            var aulaRequest = _fixture.Create<AulaRequest>();
+			var professor = _fixture.Create<Curso>();
+			var aulaRequest = _fixture.Create<AulaRequest>();
 
 			//Act
-            _cursoRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(professor);
-            _aulaRepository.AdicionarAsync(Arg.Any<Aula>()).Returns(Task.CompletedTask);
-            var result = await _aulaService.CadastrarAulaAsync(aulaRequest);
+			_cursoRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(professor);
+			_aulaRepository.AdicionarAsync(Arg.Any<Aula>()).Returns(Task.CompletedTask);
+			var result = await _aulaService.CadastrarAulaAsync(aulaRequest);
 
 			//Assert
-            result.Should().NotBe(Guid.Empty);
-        }
-                
-        [Fact(DisplayName = "Deleta uma Aula Válida")]
-        public async Task AulaService_DeletaAula_DeveDeletar()
-        {
+			result.Should().NotBe(Guid.Empty);
+		}
+
+		[Fact(DisplayName = "Deleta uma Aula Válida")]
+		public async Task AulaService_DeletaAula_DeveDeletar()
+		{
 			// Arrange
 			var id = Guid.NewGuid();
 			var aula = _fixture.Create<AulaOnline>();
@@ -78,7 +76,7 @@ namespace OA_Core.Tests.Service
 			var page = 0;
 			var rows = 10;
 			var listEntity = _fixture.Create<List<AulaOnline>>();
-			_aulaRepository.ObterTodosAsync(page, rows).Returns(listEntity);			
+			_aulaRepository.ObterTodosAsync(page, rows).Returns(listEntity);
 
 			// Act
 			var result = await _aulaService.ObterTodasAulasAsync(page, rows);
@@ -245,7 +243,7 @@ namespace OA_Core.Tests.Service
 		{
 			// Arrange
 			var cursoId = Guid.NewGuid();
-			var ordens = new[] { new OrdensRequest { Id = Guid.NewGuid(), Ordem = 1 }};
+			var ordens = new[] { new OrdensRequest { Id = Guid.NewGuid(), Ordem = 1 } };
 
 			var aula = _fixture.Build<AulaOnline>()
 				.With(a => a.CursoId, cursoId)
@@ -254,7 +252,7 @@ namespace OA_Core.Tests.Service
 
 			var aulas = new List<AulaOnline>();
 			aulas.Add(aula);
-			
+
 			_aulaRepository.ObterTodosAsync(Arg.Any<Expression<Func<Aula, bool>>>()).Returns(aulas);
 
 			// Act
@@ -266,36 +264,36 @@ namespace OA_Core.Tests.Service
 		}
 
 		[Fact(DisplayName = "Cria uma Aula com CursoId inválido")]
-        public async Task AulaService_CriarAulaComCursoIdInvalido_DeveSerInvalido()
-        {
+		public async Task AulaService_CriarAulaComCursoIdInvalido_DeveSerInvalido()
+		{
 			//Arrange
-            var cursoRequest = _fixture.Create<AulaRequest>();
+			var cursoRequest = _fixture.Create<AulaRequest>();
 
 			//Act
 			//Assert
-            await Assert.ThrowsAsync<InformacaoException>(() => _aulaService.CadastrarAulaAsync(cursoRequest));
-        }
+			await Assert.ThrowsAsync<InformacaoException>(() => _aulaService.CadastrarAulaAsync(cursoRequest));
+		}
 
-        [Fact(DisplayName = "Atualiza uma Aula com Id inválido")]
-        public async Task AulaService_AtualizarAulaComIdInvalido_DeveSerInvalido()
-        {
+		[Fact(DisplayName = "Atualiza uma Aula com Id inválido")]
+		public async Task AulaService_AtualizarAulaComIdInvalido_DeveSerInvalido()
+		{
 			//Arrange
-            var aulaRequestPut = _fixture.Create<AulaRequestPut>();
+			var aulaRequestPut = _fixture.Create<AulaRequestPut>();
 
 			//Act
 			//Assert
-            await Assert.ThrowsAsync<InformacaoException>(() => _aulaService.EditarAulaAsync(Guid.NewGuid(), aulaRequestPut));
-        }
-        
+			await Assert.ThrowsAsync<InformacaoException>(() => _aulaService.EditarAulaAsync(Guid.NewGuid(), aulaRequestPut));
+		}
 
-        [Fact(DisplayName = "Obtém uma Aula pelo Id inválido")]
-        public async Task AulaService_ObterAulaPorIdInvalido_DeveSerInvalido()
-        {
+
+		[Fact(DisplayName = "Obtém uma Aula pelo Id inválido")]
+		public async Task AulaService_ObterAulaPorIdInvalido_DeveSerInvalido()
+		{
 			//Arrange
 			//Act
 			//Assert
-            await Assert.ThrowsAsync<InformacaoException>(() => _aulaService.ObterAulaPorIdAsync(Guid.NewGuid()));
-        }
+			await Assert.ThrowsAsync<InformacaoException>(() => _aulaService.ObterAulaPorIdAsync(Guid.NewGuid()));
+		}
 
 		[Fact(DisplayName = "Deleta uma aula - Aula não encontrada")]
 		public async Task AulaService_DeletaAula_AulaNaoEncontrada_DeveLancarExcecao()
@@ -309,19 +307,19 @@ namespace OA_Core.Tests.Service
 		}
 
 		[Fact(DisplayName = "Cria uma Aula com Campos inválidos")]
-        public async Task AulaService_CriarAulaComCamposInvalidos_DeveSerInvalido()
-        {
+		public async Task AulaService_CriarAulaComCamposInvalidos_DeveSerInvalido()
+		{
 			//Arrange                   
-            var professor = _fixture.Create<Curso>();
-            var aulaRequest = _fixture.Create<AulaRequest>();
-            aulaRequest.Titulo = string.Empty;
+			var professor = _fixture.Create<Curso>();
+			var aulaRequest = _fixture.Create<AulaRequest>();
+			aulaRequest.Titulo = string.Empty;
 
 			//Act
-            _cursoRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(professor);
-            await _aulaService.CadastrarAulaAsync(aulaRequest);
+			_cursoRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(professor);
+			await _aulaService.CadastrarAulaAsync(aulaRequest);
 
 			//Assert
-            _notifier.Received().Handle(Arg.Is<FluentValidation.Results.ValidationResult>(v => v.Errors.Any(e => e.PropertyName == "Titulo" && e.ErrorMessage == "Titulo precisa ser preenchido")));
-        }
-    }
+			_notifier.Received().Handle(Arg.Is<FluentValidation.Results.ValidationResult>(v => v.Errors.Any(e => e.PropertyName == "Titulo" && e.ErrorMessage == "Titulo precisa ser preenchido")));
+		}
+	}
 }

@@ -18,8 +18,8 @@ namespace OA_Core.Service
 		private readonly IUsuarioRepository _usuarioRepository;
 		private readonly INotificador _notificador;
 
-		public AssinaturaService(IMapper mapper, IAssinaturaRepository assinaturaRepository, 
-							     IUsuarioRepository usuarioRepository, INotificador notificador)
+		public AssinaturaService(IMapper mapper, IAssinaturaRepository assinaturaRepository,
+								 IUsuarioRepository usuarioRepository, INotificador notificador)
 		{
 			_usuarioRepository = usuarioRepository;
 			_mapper = mapper;
@@ -29,7 +29,7 @@ namespace OA_Core.Service
 
 		public async Task<Guid> AdicionarAssinaturaAsync(AssinaturaRequest assinatura)
 		{
-			
+
 			var entity = _mapper.Map<Assinatura>(assinatura);
 
 			if (await _usuarioRepository.ObterPorIdAsync(assinatura.UsuarioId) is null)
@@ -46,7 +46,7 @@ namespace OA_Core.Service
 
 
 			if (assinaturaExistente is not null)
-			{				
+			{
 				entity.DataAtivacao = assinaturaExistente.DataVencimento.AddDays(1);
 				entity.DataVencimento = entity.DataCriacao.AddYears(1);
 				await _assinaturaRepository.AdicionarAsync(entity);
@@ -61,9 +61,9 @@ namespace OA_Core.Service
 		}
 
 		public async Task<Guid> CancelarAssinaturaAsync(Guid id, AssinaturaCancelamentoRequest assinatura)
-		{			
+		{
 			var assinaturaParaCancelar = await _assinaturaRepository.ObterPorIdAsync(id);
-			if(assinaturaParaCancelar is null) 
+			if (assinaturaParaCancelar is null)
 			{
 				throw new InformacaoException(StatusException.NaoEncontrado, $"Assinatura {id} inválido ou não existe");
 			}

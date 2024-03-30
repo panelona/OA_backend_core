@@ -2,8 +2,8 @@
 
 namespace OA_Core.Domain.Interfaces.Repository
 {
-    public interface IProfessorRepository : IBaseRepository<Professor>
-    {
+	public interface IProfessorRepository : IBaseRepository<Professor>
+	{
 
-    }
+	}
 }

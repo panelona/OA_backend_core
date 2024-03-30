@@ -1,16 +1,15 @@
 ﻿using AutoFixture;
 using AutoMapper;
+using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using OA_Core.Api.Controllers;
 using OA_Core.Domain.Contracts.Request;
+using OA_Core.Domain.Contracts.Response;
 using OA_Core.Domain.Entities;
 using OA_Core.Domain.Interfaces.Service;
 using OA_Core.Tests.Config;
-using FluentAssertions;
-using FluentAssertions.Common;
-using OA_Core.Domain.Contracts.Response;
 
 namespace OA_Core.Tests.Controller
 {
@@ -18,14 +17,14 @@ namespace OA_Core.Tests.Controller
 	public class AvaliacaoControllerTest
 	{
 		private readonly Fixture _fixture;
-		private readonly IAvaliacaoService _avaliacaoSevice;		
+		private readonly IAvaliacaoService _avaliacaoSevice;
 		private readonly IMapper _mapper;
 
 		public AvaliacaoControllerTest()
 		{
 			_mapper = MapperConfig.Get();
 			_fixture = FixtureConfig.GetFixture();
-			_avaliacaoSevice = Substitute.For<IAvaliacaoService>();			
+			_avaliacaoSevice = Substitute.For<IAvaliacaoService>();
 		}
 		[Fact(DisplayName = "Adiciona uma avaliacao")]
 		public async Task AvaliacaoController_CriaAvaliacao_DeveCriar()
@@ -39,7 +38,7 @@ namespace OA_Core.Tests.Controller
 
 			//Act
 			_avaliacaoSevice.CadastrarAvaliacaoAsync(avaliacaoRequest).Returns(entity.Id);
-			
+
 			var controllerResult = await avaliacaoController.CadastrarAvaliacao(avaliacaoRequest);
 			//Assert
 			var actionResult = Assert.IsType<ActionResult<Guid>>(controllerResult);
@@ -47,8 +46,8 @@ namespace OA_Core.Tests.Controller
 
 
 			Assert.Equal(StatusCodes.Status201Created, createdAtRouteResult.StatusCode);
-			Assert.Equal(entity.Id, createdAtRouteResult.Value);		
-			
+			Assert.Equal(entity.Id, createdAtRouteResult.Value);
+
 		}
 
 		[Fact(DisplayName = "Inicia uma avaliacao")]
@@ -57,7 +56,7 @@ namespace OA_Core.Tests.Controller
 			//Arrange
 			var avaliacaoController = new AvaliacaoController(_avaliacaoSevice);
 
-			var avaliacaoRequest = _fixture.Create<AvaliacaoUsuarioRequest>();			
+			var avaliacaoRequest = _fixture.Create<AvaliacaoUsuarioRequest>();
 
 			//Act
 			await _avaliacaoSevice.IniciarAvaliacaoAsync(avaliacaoRequest);
@@ -67,7 +66,7 @@ namespace OA_Core.Tests.Controller
 			var createdAtRouteResult = Assert.IsType<NoContentResult>(actionResult);
 
 
-			Assert.Equal(StatusCodes.Status204NoContent, createdAtRouteResult.StatusCode);	
+			Assert.Equal(StatusCodes.Status204NoContent, createdAtRouteResult.StatusCode);
 		}
 
 		[Fact(DisplayName = "Encerra uma avaliacao")]
@@ -76,11 +75,11 @@ namespace OA_Core.Tests.Controller
 			//Arrange
 			var avaliacaoController = new AvaliacaoController(_avaliacaoSevice);
 
-			var avaliacaoRequest = _fixture.Create<AvaliacaoUsuarioRequest>();		
+			var avaliacaoRequest = _fixture.Create<AvaliacaoUsuarioRequest>();
 
 			//Act
 			await _avaliacaoSevice.EncerrarAvaliacaoAsync(avaliacaoRequest);
-			
+
 			var controllerResult = await avaliacaoController.EncerrarAvaliacaoUsuario(avaliacaoRequest);
 
 			//Assert
@@ -192,6 +191,6 @@ namespace OA_Core.Tests.Controller
 
 			Assert.Equal(StatusCodes.Status204NoContent, createdAtRouteResult.StatusCode);
 		}
-	
+
 	}
 }

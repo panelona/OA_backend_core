@@ -1,10 +1,10 @@
 ﻿namespace OA_Core.Domain.Enums
 {
-    public enum AvaliacaoTipoEnum
-    {        
+	public enum AvaliacaoTipoEnum
+	{
 		Conclusao,
 		Revisao,
-		Aleatoria, 
-		Admissao        
-    }
+		Aleatoria,
+		Admissao
+	}
 }

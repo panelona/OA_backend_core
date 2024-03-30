@@ -1,18 +1,11 @@
-﻿using OA_Core.Domain.Enums;
-using OA_Core.Domain.Validations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OA_Core.Domain.Validations;
 
 namespace OA_Core.Domain.Entities
 {
 	public class UsuarioCurso : Entidade
 	{
 
-		public UsuarioCurso(Guid cursoId, Guid usuarioId,string status, int progresso)
+		public UsuarioCurso(Guid cursoId, Guid usuarioId, string status, int progresso)
 		{
 			Id = Guid.NewGuid();
 			CursoId = cursoId;

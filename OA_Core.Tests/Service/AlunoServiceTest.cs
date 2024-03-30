@@ -8,7 +8,6 @@ using OA_Core.Domain.Entities;
 using OA_Core.Domain.Exceptions;
 using OA_Core.Domain.Interfaces.Notifications;
 using OA_Core.Domain.Interfaces.Repository;
-using OA_Core.Domain.ValueObjects;
 using OA_Core.Service;
 using OA_Core.Tests.Config;
 
@@ -16,20 +15,20 @@ namespace OA_Core.Tests.Service
 {
 	[Collection(nameof(AlunoBogusCollection))]
 	[Trait("Service", "Aluno Service")]
-    public class AlunoServiceTest
-    {
-        private readonly IMapper _mapper;
-        private readonly Fixture _fixture;
-        private readonly INotificador _notifier;
+	public class AlunoServiceTest
+	{
+		private readonly IMapper _mapper;
+		private readonly Fixture _fixture;
+		private readonly INotificador _notifier;
 		private readonly AlunoFixture _alunoFixture;
 
-        public AlunoServiceTest(AlunoFixture alunoFixture)
-        {
-            _mapper = MapperConfig.Get();
-            _fixture = FixtureConfig.GetFixture();
-            _notifier = Substitute.For<INotificador>();
+		public AlunoServiceTest(AlunoFixture alunoFixture)
+		{
+			_mapper = MapperConfig.Get();
+			_fixture = FixtureConfig.GetFixture();
+			_notifier = Substitute.For<INotificador>();
 			_alunoFixture = alunoFixture;
-        }
+		}
 
 		[Fact(DisplayName = "Cadastra alunos")]
 		public async Task AlunoService_CriaAluno_DeveCriar()
@@ -58,10 +57,10 @@ namespace OA_Core.Tests.Service
 		[InlineData(2, 20)]
 		[InlineData(4, 5)]
 		public async Task AlunoService_ObtemAluno_DeveRetornarLista(int pagina, int linhas)
-        {
+		{
 			//Arrange
-            var alunos = AlunoFixture.GerarAlunos(linhas, true);
-            var mockRepository = Substitute.For<IAlunoRepository>();
+			var alunos = AlunoFixture.GerarAlunos(linhas, true);
+			var mockRepository = Substitute.For<IAlunoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var service = new AlunoService(mockRepository, MockUsuarioRepository, _mapper, _notifier);
 
@@ -73,9 +72,9 @@ namespace OA_Core.Tests.Service
 			resultado.Should().HaveCount(linhas);
 		}
 
-        [Fact(DisplayName = "Obtém alunos por id")]
-        public async Task AlunoService_ObtemAluno_DeveRetornarUmAluno()
-        {
+		[Fact(DisplayName = "Obtém alunos por id")]
+		public async Task AlunoService_ObtemAluno_DeveRetornarUmAluno()
+		{
 			//Arrange
 			var aluno = AlunoFixture.GerarAluno();
 			var mockRepository = Substitute.For<IAlunoRepository>();
@@ -85,31 +84,31 @@ namespace OA_Core.Tests.Service
 
 			//Act
 			mockRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(aluno);
-            var result = await service.ObterAlunoPorIdAsync(aluno.Id);
+			var result = await service.ObterAlunoPorIdAsync(aluno.Id);
 
 			//Assert
 			result.Should().BeEquivalentTo(alunoResponse);
-        }
+		}
 
-        [Fact(DisplayName = "Tenta obter alunos por id inválido")]
-        public async Task AlunoService_ObtemAlunoNull_DeveSerInvalido()
-        {
+		[Fact(DisplayName = "Tenta obter alunos por id inválido")]
+		public async Task AlunoService_ObtemAlunoNull_DeveSerInvalido()
+		{
 			//Arrange
-            var mockRepository = Substitute.For<IAlunoRepository>();
+			var mockRepository = Substitute.For<IAlunoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var service = new AlunoService(mockRepository, MockUsuarioRepository, _mapper, _notifier);
 
 			//Act
 			//Assert
 			await Assert.ThrowsAsync<InformacaoException>(() => service.ObterAlunoPorIdAsync(Guid.NewGuid()));
-        }
+		}
 
-        [Fact(DisplayName = "Deleta aluno")]
-        public async Task AlunoService_DeletaAluno_DeveDeletar()
-        {
+		[Fact(DisplayName = "Deleta aluno")]
+		public async Task AlunoService_DeletaAluno_DeveDeletar()
+		{
 			//Arrange
-            var aluno = _fixture.Create<Aluno>();
-            var mockRepository = Substitute.For<IAlunoRepository>();
+			var aluno = _fixture.Create<Aluno>();
+			var mockRepository = Substitute.For<IAlunoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var service = new AlunoService(mockRepository, MockUsuarioRepository, _mapper, _notifier);
 
@@ -118,8 +117,8 @@ namespace OA_Core.Tests.Service
 			await service.DeletarAlunoAsync(aluno.Id);
 
 			//Assert
-            await mockRepository.Received().EditarAsync(aluno);
-        }
+			await mockRepository.Received().EditarAsync(aluno);
+		}
 
 		[Fact(DisplayName = "Tenta cadastrar aluno com foto inválida")]
 		public async Task AlunoService_CadastraAlunoFotoInvalida_DeveSerInvalido()

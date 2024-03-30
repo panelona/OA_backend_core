@@ -2,8 +2,8 @@
 
 namespace OA_Core.Domain.Contracts.Response
 {
-    public class AvaliacaoResponse : BaseResponse
-    {
+	public class AvaliacaoResponse : BaseResponse
+	{
 		public string Nome { get; set; }
 		public string Descricao { get; set; }
 		public AvaliacaoTipoEnum Tipo { get; set; }

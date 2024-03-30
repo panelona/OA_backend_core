@@ -2,14 +2,12 @@
 using AutoMapper;
 using FluentAssertions;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using OA_Core.Domain.Contracts.Request;
 using OA_Core.Domain.Contracts.Response;
 using OA_Core.Domain.Entities;
 using OA_Core.Domain.Exceptions;
 using OA_Core.Domain.Interfaces.Notifications;
 using OA_Core.Domain.Interfaces.Repository;
-using OA_Core.Domain.Interfaces.Service;
 using OA_Core.Service;
 using OA_Core.Tests.Config;
 using System.Linq.Expressions;

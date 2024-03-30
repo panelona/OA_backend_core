@@ -30,10 +30,10 @@ namespace OA_Core.Tests.Service
 		public async Task AvaliacaoService_CriaAvaliacao_DeveCriar()
 		{
 			//Arrange
-			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();			
+			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
-			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository,  _notifier, _mapper, MockAvaliacaoUsuarioRepository);
+			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
 			var avaliacao = _fixture.Create<Avaliacao>();
 			var avaliacaoRequest = _fixture.Create<AvaliacaoRequest>();
 
@@ -50,7 +50,7 @@ namespace OA_Core.Tests.Service
 		public async Task AulaService_CriarAvaliacaoComNomeInvalido_DeveSerInvalido()
 		{
 			//Arrange
-			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();		
+			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
 			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
@@ -66,7 +66,7 @@ namespace OA_Core.Tests.Service
 		public async Task AvaliacaoService_AtualizarAvaliacao_DeveAtualizar()
 		{
 			//Arrange
-			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();;
+			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>(); ;
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
 			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
@@ -85,12 +85,12 @@ namespace OA_Core.Tests.Service
 		public async Task AvaliacaoService_AtualizarAvaliacaoComIdInvalido_DeveSerInvalido()
 		{
 			//Arrange
-			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();	
+			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
 			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
 			var avaliacaoRequest = _fixture.Create<AvaliacaoRequest>();
-			
+
 
 			//Act
 			//Assert
@@ -101,7 +101,7 @@ namespace OA_Core.Tests.Service
 		public async Task AvaliacaoService_ObterAvaliacaoPorId_DeveObterUm()
 		{
 			//Arrange
-			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();	
+			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
 			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
@@ -134,7 +134,7 @@ namespace OA_Core.Tests.Service
 		public async Task AulaService_DeletaAula_DeveDeletar()
 		{
 			//Arrange
-			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();			
+			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
 			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
@@ -152,7 +152,7 @@ namespace OA_Core.Tests.Service
 		public async Task AvaliacaoService_DeletarAvaliacaoComIdInvalido_DeveSerInvalido()
 		{
 			//Arrange
-			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();			
+			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
 			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
@@ -166,7 +166,7 @@ namespace OA_Core.Tests.Service
 		public async Task AvaliacaoService_ObterTodosAvaliacoes_DeveObter()
 		{
 			//Arrange
-			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();			
+			var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();
 			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
 			var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
 			var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
@@ -178,6 +178,6 @@ namespace OA_Core.Tests.Service
 
 			//Assert
 			result.Should().HaveCount(5);
-		}	
+		}
 	}
 }

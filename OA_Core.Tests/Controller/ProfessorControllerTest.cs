@@ -2,12 +2,8 @@
 using AutoFixture;
 using AutoMapper;
 using FluentAssertions;
-using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
-using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Validations;
 using NSubstitute;
 using OA_Core.Api.Controllers;
 using OA_Core.Domain.Contracts.Request;
@@ -40,10 +36,10 @@ namespace OA_Core.Tests.Controller
 
 			var professorRequest = new ProfessorRequest
 			{
-				Formacao = "Formação teste",				
+				Formacao = "Formação teste",
 				Experiencia = "Experiencia Teste",
 				Foto = "Foto Teste",
-				Biografia = "Bio Testes",				
+				Biografia = "Bio Testes",
 				UsuarioId = new Guid("838e8395-5794-4f81-8d53-813a91485643"),
 			};
 			var entity = _mapper.Map<Professor>(professorRequest);
@@ -133,8 +129,8 @@ namespace OA_Core.Tests.Controller
 
 			//Assert
 			await _service.Received().DeletarProfessorAsync(id);
-		}		
+		}
 	}
-	
+
 }
-	
+

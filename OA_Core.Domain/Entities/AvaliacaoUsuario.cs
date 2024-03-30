@@ -1,21 +1,20 @@
 ﻿using FluentValidation;
-using OA_Core.Domain.Validations;
-using System;
 using FluentValidation.Results;
+using OA_Core.Domain.Validations;
 
 namespace OA_Core.Domain.Entities
 {
-	public class AvaliacaoUsuario 
+	public class AvaliacaoUsuario
 	{
-		public AvaliacaoUsuario(Guid avaliacaoId, 						
+		public AvaliacaoUsuario(Guid avaliacaoId,
 								Guid usuarioId)
 		{
 			AvaliacaoId = avaliacaoId;
-			UsuarioId = usuarioId;		
+			UsuarioId = usuarioId;
 			Validate(this, new AvaliacaoUsuarioValidator());
 		}
 
-		public Guid AvaliacaoId{ get; set; }
+		public Guid AvaliacaoId { get; set; }
 		public virtual Avaliacao Avaliacao { get; set; }
 		public Guid UsuarioId { get; set; }
 		public virtual Usuario Usuario { get; set; }

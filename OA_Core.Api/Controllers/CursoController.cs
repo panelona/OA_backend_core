@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OA_Core.Domain.Contracts.Request;
 using OA_Core.Domain.Contracts.Response;
-using OA_Core.Domain.Entities;
 using OA_Core.Domain.Interfaces.Service;
 
 namespace OA_Core.Api.Controllers

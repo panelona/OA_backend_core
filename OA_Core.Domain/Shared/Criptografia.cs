@@ -4,7 +4,7 @@
 	{
 		public static string CriptografarSenha(string senha)
 		{
-			string salt = BC.GenerateSalt(12); 
+			string salt = BC.GenerateSalt(12);
 			string senhaCriptografada = BC.HashPassword(senha, salt);
 			return senhaCriptografada;
 		}

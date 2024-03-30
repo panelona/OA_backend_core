@@ -47,7 +47,7 @@ namespace OA_Core.Tests.Controller
 
 			//Assert
 			var actionResult = Assert.IsType<CreatedResult>(controllerResult);
-			
+
 			actionResult.StatusCode.Should().Be(StatusCodes.Status201Created);
 			actionResult.Value.Should().Be(entity.Id);
 		}

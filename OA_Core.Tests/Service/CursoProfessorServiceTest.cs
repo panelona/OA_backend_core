@@ -8,47 +8,42 @@ using OA_Core.Domain.Interfaces.Notifications;
 using OA_Core.Domain.Interfaces.Repository;
 using OA_Core.Service;
 using OA_Core.Tests.Config;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OA_Core.Tests.Service
 {
-    [Trait("Service", "CursoProfessor Service")]
-    public class CursoProfessorServiceTest
-    {
-        private readonly IMapper _mapper;
-        private readonly Fixture _fixture;
-        private readonly INotificador _notifier;
+	[Trait("Service", "CursoProfessor Service")]
+	public class CursoProfessorServiceTest
+	{
+		private readonly IMapper _mapper;
+		private readonly Fixture _fixture;
+		private readonly INotificador _notifier;
 		private readonly IProfessorRepository _professorRepository;
 		private readonly ICursoRepository _cursoRepository;
 		private readonly ICursoProfessorRepository _cursoProfessorRepository;
 
-        public CursoProfessorServiceTest()
-        {
-            _fixture = FixtureConfig.GetFixture();
-            _mapper = MapperConfig.Get();
-            _notifier = Substitute.For<INotificador>();
+		public CursoProfessorServiceTest()
+		{
+			_fixture = FixtureConfig.GetFixture();
+			_mapper = MapperConfig.Get();
+			_notifier = Substitute.For<INotificador>();
 			_professorRepository = Substitute.For<IProfessorRepository>();
 			_cursoRepository = Substitute.For<ICursoRepository>();
 			_cursoProfessorRepository = Substitute.For<ICursoProfessorRepository>();
-        }
+		}
 
-        [Fact(DisplayName = "Cria um CursoProfessor Válido")]
-        public async Task CriarCurso()
-        {                       
-            var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
+		[Fact(DisplayName = "Cria um CursoProfessor Válido")]
+		public async Task CriarCurso()
+		{
+			var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
 
-            var professor = _fixture.Create<Professor>();
+			var professor = _fixture.Create<Professor>();
 			var curso = _fixture.Create<Curso>();
 
 			var cursoProfessorRequest = _fixture.Create<CursoProfessorRequest>();
 
-            _professorRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(professor);
-            _cursoRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(curso);
+			_professorRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(professor);
+			_cursoRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(curso);
 			_cursoProfessorRepository.AdicionarAsync(Arg.Any<CursoProfessor>()).Returns(Task.CompletedTask);
 
 			var result = await cursoProfessorService.CadastrarCursoProfessorAsync(cursoProfessorRequest, curso.Id);
@@ -143,12 +138,12 @@ namespace OA_Core.Tests.Service
 		}
 
 		[Fact(DisplayName = "Obtém todos os CursoProfessor")]
-        public async Task ObterTodosCursoProfessor()
-        {         
-            var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
+		public async Task ObterTodosCursoProfessor()
+		{
+			var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
 
-            var cursoProfessores = _fixture.CreateMany<CursoProfessor>(5);
-            _cursoProfessorRepository.ObterTodosAsync(Arg.Any<int>(), Arg.Any<int>()).Returns(cursoProfessores);
+			var cursoProfessores = _fixture.CreateMany<CursoProfessor>(5);
+			_cursoProfessorRepository.ObterTodosAsync(Arg.Any<int>(), Arg.Any<int>()).Returns(cursoProfessores);
 
 			var result = await cursoProfessorService.ObterTodosCursoProfessoresAsync(1, 5);
 
@@ -198,12 +193,12 @@ namespace OA_Core.Tests.Service
 		}
 
 		[Fact(DisplayName = "Obtém um CursoProfessor pelo Id")]
-        public async Task ObterCursoProfessorPorId()
-        {          
-            var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
+		public async Task ObterCursoProfessorPorId()
+		{
+			var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
 
-            var curso = _fixture.Create<CursoProfessor>();
-            _cursoProfessorRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(curso);
+			var curso = _fixture.Create<CursoProfessor>();
+			_cursoProfessorRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(curso);
 
 			var result = await cursoProfessorService.ObterCursoProfessorPorIdAsync(curso.Id);
 
@@ -220,13 +215,13 @@ namespace OA_Core.Tests.Service
 		}
 
 		[Fact(DisplayName = "Atualiza um CursoProfessor")]
-        public async Task AtualizarCursoProfessor()
-        {
-            
-            var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
+		public async Task AtualizarCursoProfessor()
+		{
 
-            var cursoProfessorRequest = _fixture.Create<CursoProfessorRequest>();
-            var cursoProfessor = _fixture.Create<CursoProfessor>();
+			var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
+
+			var cursoProfessorRequest = _fixture.Create<CursoProfessorRequest>();
+			var cursoProfessor = _fixture.Create<CursoProfessor>();
 			cursoProfessorRequest.ProfessorId = cursoProfessor.Id;
 
 			_cursoProfessorRepository.ObterAsync(Arg.Any<Expression<Func<CursoProfessor, bool>>>()).Returns(cursoProfessor);
@@ -236,16 +231,16 @@ namespace OA_Core.Tests.Service
 			await _cursoProfessorRepository.Received().EditarAsync(cursoProfessor);
 		}
 
-        [Fact(DisplayName = "Atualiza um CursoProfessor com Id inválido")]
-        public async Task AtualizarCursoComIdInvalido()
-        {
-            
-            var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
+		[Fact(DisplayName = "Atualiza um CursoProfessor com Id inválido")]
+		public async Task AtualizarCursoComIdInvalido()
+		{
 
-            var cursoProfessorRequest = _fixture.Create<CursoProfessorRequest>();
+			var cursoProfessorService = new CursoProfessorService(_mapper, _cursoProfessorRepository, _professorRepository, _cursoRepository, _notifier);
 
-            await Assert.ThrowsAsync<InformacaoException>(() => cursoProfessorService.EditarCursoProfessorAsync(Guid.NewGuid(), cursoProfessorRequest));
-        }
+			var cursoProfessorRequest = _fixture.Create<CursoProfessorRequest>();
+
+			await Assert.ThrowsAsync<InformacaoException>(() => cursoProfessorService.EditarCursoProfessorAsync(Guid.NewGuid(), cursoProfessorRequest));
+		}
 
 		[Fact(DisplayName = "Atualiza um CursoProfessor com Campos inválidos")]
 		public async Task AtualizarCursoProfessorComCamposInvalidos()
@@ -262,6 +257,6 @@ namespace OA_Core.Tests.Service
 			await cursoProfessorService.EditarCursoProfessorAsync(Guid.NewGuid(), cursoProfessorRequest);
 
 			_notifier.Received().Handle(Arg.Is<FluentValidation.Results.ValidationResult>(v => v.Errors.Any(e => e.PropertyName == "ProfessorId" && e.ErrorMessage == "ProfessorId não pode ser nulo")));
-		}     
-    }
+		}
+	}
 }

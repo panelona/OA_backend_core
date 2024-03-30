@@ -44,7 +44,7 @@ namespace OA_Core.Api.Controllers
 
 		[HttpPatch("{id}/AtivarDesativar", Name = "AtivarDesativarAvaliacao")]
 		[ProducesResponseType(204)]
-		public async Task<ActionResult> AtivarDesativarAvaliacao([FromBody] bool avaliar, [FromRoute]Guid id)
+		public async Task<ActionResult> AtivarDesativarAvaliacao([FromBody] bool avaliar, [FromRoute] Guid id)
 		{
 			await _service.AtivivarDesativarAvaliacaoAsync(id, avaliar);
 
@@ -86,6 +86,6 @@ namespace OA_Core.Api.Controllers
 			var paginationResponse = new PaginationResponse<AvaliacaoResponse>(page, rows, listResponse);
 
 			return Ok(paginationResponse);
-		}	
+		}
 	}
 }

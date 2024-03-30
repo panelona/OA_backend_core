@@ -4,6 +4,6 @@
 	{
 		Ativa = 0,
 		Vencida = 1,
-		Cancelada =2
+		Cancelada = 2
 	}
 }

@@ -10,52 +10,52 @@ using OA_Core.Domain.Interfaces.Service;
 
 namespace OA_Core.Service
 {
-    public class AlunoService : IAlunoService
-    {
-        private readonly IAlunoRepository _alunoRepository;
+	public class AlunoService : IAlunoService
+	{
+		private readonly IAlunoRepository _alunoRepository;
 		private readonly IUsuarioRepository _usuarioRepository;
 		private readonly IMapper _mapper;
-        private readonly INotificador _notificador;
+		private readonly INotificador _notificador;
 
 		public AlunoService(IAlunoRepository repository, IUsuarioRepository usuarioRepository, IMapper mapper, INotificador notificador)
-        {
-            _alunoRepository = repository;
+		{
+			_alunoRepository = repository;
 			_usuarioRepository = usuarioRepository;
 			_mapper = mapper;
-            _notificador = notificador;
-        }
+			_notificador = notificador;
+		}
 
-        public async Task DeletarAlunoAsync(Guid id)
-        {
-            var aluno = await _alunoRepository.ObterPorIdAsync(id) ??
-                throw new InformacaoException(StatusException.NaoEncontrado, $"Usuario {id} não encontrado");
+		public async Task DeletarAlunoAsync(Guid id)
+		{
+			var aluno = await _alunoRepository.ObterPorIdAsync(id) ??
+				throw new InformacaoException(StatusException.NaoEncontrado, $"Usuario {id} não encontrado");
 
-            aluno.DataDelecao = DateTime.Now;
-            await _alunoRepository.EditarAsync(aluno);
-        }
+			aluno.DataDelecao = DateTime.Now;
+			await _alunoRepository.EditarAsync(aluno);
+		}
 
-        public async Task<IEnumerable<AlunoResponse>> ObterTodosAlunosAsync(int page, int rows)
-        {
-            var listEntity = await _alunoRepository.ObterTodosAsync(page, rows);
+		public async Task<IEnumerable<AlunoResponse>> ObterTodosAlunosAsync(int page, int rows)
+		{
+			var listEntity = await _alunoRepository.ObterTodosAsync(page, rows);
 
-            return _mapper.Map<IEnumerable<AlunoResponse>>(listEntity);
-        }
+			return _mapper.Map<IEnumerable<AlunoResponse>>(listEntity);
+		}
 
-        public async Task<AlunoResponse> ObterAlunoPorIdAsync(Guid id)
-        {
-            var usuario = await _alunoRepository.ObterPorIdAsync(id) ??
-                throw new InformacaoException(StatusException.NaoEncontrado, $"Aluno {id} não encontrado");
+		public async Task<AlunoResponse> ObterAlunoPorIdAsync(Guid id)
+		{
+			var usuario = await _alunoRepository.ObterPorIdAsync(id) ??
+				throw new InformacaoException(StatusException.NaoEncontrado, $"Aluno {id} não encontrado");
 
-            return _mapper.Map<AlunoResponse>(usuario);
-        }
+			return _mapper.Map<AlunoResponse>(usuario);
+		}
 
-        public async Task<Guid> CadastrarAlunoAsync(AlunoRequest alunoRequest)
-        {
-            var entity = _mapper.Map<Aluno>(alunoRequest);
+		public async Task<Guid> CadastrarAlunoAsync(AlunoRequest alunoRequest)
+		{
+			var entity = _mapper.Map<Aluno>(alunoRequest);
 			alunoRequest.Cpf.Verificar();
 			entity.Cpf = alunoRequest.Cpf.Exibir();
 
-			if (await _usuarioRepository.ObterPorIdAsync(alunoRequest.UsuarioId)is null)
+			if (await _usuarioRepository.ObterPorIdAsync(alunoRequest.UsuarioId) is null)
 				throw new InformacaoException(StatusException.NaoEncontrado, $"UsuarioId {alunoRequest.UsuarioId} inválido ou não existente");
 
 			var existingAlunoWithCpf = await _alunoRepository.ObterAsync(x => x.Cpf == entity.Cpf);
@@ -63,17 +63,17 @@ namespace OA_Core.Service
 				throw new InformacaoException(StatusException.Conflito, $"CPF {entity.Cpf} incorreto.");
 
 			if (!entity.Valid)
-            {
-                _notificador.Handle(entity.ValidationResult);
-                return Guid.Empty;
-            }
+			{
+				_notificador.Handle(entity.ValidationResult);
+				return Guid.Empty;
+			}
 
-            await _alunoRepository.AdicionarAsync(entity);
-            return entity.Id;
-        }
+			await _alunoRepository.AdicionarAsync(entity);
+			return entity.Id;
+		}
 
-        public async Task EditarAlunoAsync(Guid id, AlunoRequestPut alunoRequest)
-        {
+		public async Task EditarAlunoAsync(Guid id, AlunoRequestPut alunoRequest)
+		{
 
 			var entity = _mapper.Map<Aluno>(alunoRequest);
 
@@ -96,5 +96,5 @@ namespace OA_Core.Service
 			find.Foto = alunoRequest.Foto;
 			await _alunoRepository.EditarAsync(find);
 		}
-    }
+	}
 }

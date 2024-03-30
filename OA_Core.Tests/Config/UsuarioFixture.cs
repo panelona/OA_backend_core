@@ -77,7 +77,7 @@ namespace OA_Core.Tests.Config
 
 		public void Dispose()
 		{
-			
+
 		}
 	}
 }

@@ -1,40 +1,40 @@
 ﻿namespace OA_Core.Domain.ValueObjects
 {
-    public class Cpf
-    {
-        public string Registro { get; private set; }
+	public class Cpf
+	{
+		public string Registro { get; private set; }
 
-        public Cpf(string registro)
-        {
+		public Cpf(string registro)
+		{
 			//if (!Verificar())
 			//{
 			//	throw new ArgumentException("CPF inválido.", nameof(registro));
 			//}
 
 			Registro = registro;
-        }
+		}
 		public string FormatoCpf => ExibirFormatado();
 		public string FormatacaoNumeros => Exibir();
-		public override string ToString() => FormatoCpf;	
+		public override string ToString() => FormatoCpf;
 		public string Exibir()
-        {
+		{
 			var cpf = new string(Registro.Where(char.IsDigit).ToArray());
 			return $"{cpf.Substring(0, 3)}{cpf.Substring(3, 3)}{cpf.Substring(6, 3)}{cpf.Substring(9)}";
-		}		
+		}
 		public string ExibirFormatado()
-        {			
+		{
 			var cpf = new string(Registro.Where(char.IsDigit).ToArray());
 			return $"{cpf.Substring(0, 3)}.{cpf.Substring(3, 3)}.{cpf.Substring(6, 3)}-{cpf.Substring(9)}";
-		}		
+		}
 		public bool Verificar()
-        {
+		{
 			if (string.IsNullOrWhiteSpace(Registro))
 			{
 				return false;
 			}
 
 			var cpf = Exibir();
-		
+
 			if (cpf.Length != 11)
 			{
 				return false;
@@ -51,7 +51,7 @@
 			string digito;
 			int soma;
 			int resto;
-			cpf = cpf.Trim();			
+			cpf = cpf.Trim();
 			if (cpf.Length != 11)
 				return false;
 			tempCpf = cpf.Substring(0, 9);
@@ -76,6 +76,6 @@
 				resto = 11 - resto;
 			digito = digito + resto.ToString();
 			return cpf.EndsWith(digito);
-		}	
+		}
 	}
 }

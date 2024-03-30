@@ -2,23 +2,23 @@
 
 namespace OA_Core.Domain.Enums
 {
-    public enum StatusException
-    {
-        [Description("Nenhum")]
-        Nenhum,
-        [Description("Ocorreu algo inesperado")]
-        Erro,
-        [Description("Dado não encontrado")]
-        NaoEncontrado,
-        [Description("Conflito de dados")]
-        Conflito,
-        [Description("Campo(s) com formato(s) incorreto(s)")]
-        FormatoIncorreto,
-        [Description("Acesso não autorizado")]
-        NaoAutorizado,
-        [Description("Dado não processado")]
-        NaoProcessado,
-        [Description("Acesso proibido")]
-        AcessoProibido
-    }
+	public enum StatusException
+	{
+		[Description("Nenhum")]
+		Nenhum,
+		[Description("Ocorreu algo inesperado")]
+		Erro,
+		[Description("Dado não encontrado")]
+		NaoEncontrado,
+		[Description("Conflito de dados")]
+		Conflito,
+		[Description("Campo(s) com formato(s) incorreto(s)")]
+		FormatoIncorreto,
+		[Description("Acesso não autorizado")]
+		NaoAutorizado,
+		[Description("Dado não processado")]
+		NaoProcessado,
+		[Description("Acesso proibido")]
+		AcessoProibido
+	}
 }

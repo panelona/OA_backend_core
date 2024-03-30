@@ -3,7 +3,6 @@ using AutoMapper;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MySqlX.XDevAPI.Common;
 using NSubstitute;
 using OA_Core.Api.Controllers;
 using OA_Core.Domain.Contracts.Request;
@@ -34,7 +33,7 @@ namespace OA_Core.Tests.Controller
 			var alunoController = new AlunoController(_service);
 
 			var alunoRequest = _fixture.Create<AlunoRequest>();
-			
+
 			var entity = _mapper.Map<Aluno>(alunoRequest);
 
 			_service.CadastrarAlunoAsync(alunoRequest).Returns(entity.Id);
