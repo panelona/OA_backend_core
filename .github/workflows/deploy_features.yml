@@ -25,9 +25,10 @@ jobs:
       - name: Test with coverage
         run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
       - name: Code Coverage Summary
+        id: coverage-summary
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: '**/coverage.cobertura.xml'
+          filename: 'coverage.cobertura.xml'
           fail_below_min: true
           format: 'markdown'
           thresholds: '80 100'
