@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github", "Github", "{5A854A
 		.github\.gitkeep = .github\.gitkeep
 		.github\CODEOWNERS = .github\CODEOWNERS
 		.github\workflows\deploy_dev.yml = .github\workflows\deploy_dev.yml
+		.github\workflows\deploy_features.yml = .github\workflows\deploy_features.yml
 		.github\workflows\deploy_staging.yml = .github\workflows\deploy_staging.yml
 		.github\pull_request_template.md = .github\pull_request_template.md
 	EndProjectSection
