@@ -8,6 +8,7 @@ using OA_Core.Api.Controllers;
 using OA_Core.Domain.Contracts.Request;
 using OA_Core.Domain.Contracts.Response;
 using OA_Core.Domain.Entities;
+using OA_Core.Domain.Enums;
 using OA_Core.Domain.Interfaces.Service;
 using OA_Core.Tests.Config;
 
@@ -30,19 +31,96 @@ namespace OA_Core.Tests.Controller
 			_aulaController = new AulaController(_service);
 		}
 
-		[Fact(DisplayName = "Adiciona uma aula")]
-		public async Task AulaController_CriaAula_DeveCriar()
+		[Fact(DisplayName = "Adiciona uma aula do tipo Online")]
+		public async Task AulaController_CriaAula_TipoOnline_DeveCriar()
 		{
 			//Arrange
 			var aulaRequest = new AulaRequest
 			{
 				Titulo = "TestEntity",
-				Tipo = 0,
+				Tipo = TipoAula.AulaOnline,
 				Duracao = 0,
 				Ordem = 0,
 				CursoId = new Guid("cff4e2f5-f132-4a66-969c-dcc76c5ba585"),
 			};
 			var entity = _mapper.Map<AulaOnline>(aulaRequest);
+
+			//Act
+			_service.CadastrarAulaAsync(aulaRequest).Returns(entity.Id);
+
+			var controllerResult = await _aulaController.CadastrarAula(aulaRequest);
+
+			//Assert
+			var actionResult = controllerResult.Should().BeOfType<CreatedResult>().Subject;
+
+			actionResult.StatusCode.Should().Be(StatusCodes.Status201Created);
+			actionResult.Value.Should().Be(entity.Id);
+		}
+
+		[Fact(DisplayName = "Adiciona uma aula do tipo Video")]
+		public async Task AulaController_CriaAula_TipoVideo_DeveCriar()
+		{
+			//Arrange
+			var aulaRequest = new AulaRequest
+			{
+				Titulo = "TestEntity",
+				Tipo = TipoAula.AulaVideo,
+				Duracao = 0,
+				Ordem = 0,
+				CursoId = new Guid("cff4e2f5-f132-4a66-969c-dcc76c5ba585"),
+			};
+			var entity = _mapper.Map<AulaVideo>(aulaRequest);
+
+			//Act
+			_service.CadastrarAulaAsync(aulaRequest).Returns(entity.Id);
+
+			var controllerResult = await _aulaController.CadastrarAula(aulaRequest);
+
+			//Assert
+			var actionResult = controllerResult.Should().BeOfType<CreatedResult>().Subject;
+
+			actionResult.StatusCode.Should().Be(StatusCodes.Status201Created);
+			actionResult.Value.Should().Be(entity.Id);
+		}
+		[Fact(DisplayName = "Adiciona uma aula do tipo Texto")]
+		public async Task AulaController_CriaAula_TipoTexto_DeveCriar()
+		{
+			//Arrange
+			var aulaRequest = new AulaRequest
+			{
+				Titulo = "TestEntity",
+				Tipo = TipoAula.AulaTexto,
+				Duracao = 0,
+				Ordem = 0,
+				CursoId = new Guid("cff4e2f5-f132-4a66-969c-dcc76c5ba585"),
+			};
+			var entity = _mapper.Map<AulaTexto>(aulaRequest);
+
+			//Act
+			_service.CadastrarAulaAsync(aulaRequest).Returns(entity.Id);
+
+			var controllerResult = await _aulaController.CadastrarAula(aulaRequest);
+
+			//Assert
+			var actionResult = controllerResult.Should().BeOfType<CreatedResult>().Subject;
+
+			actionResult.StatusCode.Should().Be(StatusCodes.Status201Created);
+			actionResult.Value.Should().Be(entity.Id);
+		}
+
+		[Fact(DisplayName = "Adiciona uma aula do tipo Download")]
+		public async Task AulaController_CriaAula_TipoDownload_DeveCriar()
+		{
+			//Arrange
+			var aulaRequest = new AulaRequest
+			{
+				Titulo = "TestEntity",
+				Tipo = TipoAula.AulaDownload,
+				Duracao = 0,
+				Ordem = 0,
+				CursoId = new Guid("cff4e2f5-f132-4a66-969c-dcc76c5ba585"),
+			};
+			var entity = _mapper.Map<AulaDownload>(aulaRequest);
 
 			//Act
 			_service.CadastrarAulaAsync(aulaRequest).Returns(entity.Id);

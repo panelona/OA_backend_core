@@ -32,8 +32,6 @@ namespace OA_Core.Service
 
 			var entity = _mapper.Map<Assinatura>(assinatura);
 
-			if (await _usuarioRepository.ObterPorIdAsync(assinatura.UsuarioId) is null)
-				throw new InformacaoException(StatusException.NaoEncontrado, $"UsuarioId {assinatura.UsuarioId} inválido ou não existente");
 
 			if (!entity.Valid)
 			{
@@ -41,6 +39,9 @@ namespace OA_Core.Service
 				return Guid.Empty;
 
 			}
+
+			if (await _usuarioRepository.ObterPorIdAsync(assinatura.UsuarioId) is null)
+				throw new InformacaoException(StatusException.NaoEncontrado, $"UsuarioId {assinatura.UsuarioId} inválido ou não existente");
 
 			var assinaturaExistente = await _assinaturaRepository.ObterAsync(a => a.UsuarioId == entity.UsuarioId);
 

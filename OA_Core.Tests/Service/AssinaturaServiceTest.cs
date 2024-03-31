@@ -4,6 +4,7 @@ using FluentAssertions;
 using NSubstitute;
 using OA_Core.Domain.Contracts.Request;
 using OA_Core.Domain.Entities;
+using OA_Core.Domain.Exceptions;
 using OA_Core.Domain.Interfaces.Notifications;
 using OA_Core.Domain.Interfaces.Repository;
 using OA_Core.Service;
@@ -25,6 +26,25 @@ namespace OA_Core.Tests.Service
 			_notifier = Substitute.For<INotificador>();
 		}
 
+		[Fact(DisplayName = "Cria um Assinatura Inválida")]
+		public async Task CriarAssinatura_Invalida_DeveRetornarGuidEmpty()
+		{
+			//Arrange
+			var mockAssinaturaRepository = Substitute.For<IAssinaturaRepository>();
+			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
+			var assinaturaService = new AssinaturaService(_mapper, mockAssinaturaRepository, MockUsuarioRepository, _notifier);
+			var assinaturaRequest = _fixture.Create<AssinaturaRequest>();
+
+			//Act
+			MockUsuarioRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns((Usuario)null);
+
+			//Assert
+			await FluentActions.Awaiting(async () => await assinaturaService.AdicionarAssinaturaAsync(assinaturaRequest))
+					.Should().ThrowAsync<InformacaoException>();
+		}
+
+
+
 		[Fact(DisplayName = "Cria um Assinatura Válido")]
 		public async Task CriarAssinatura_Valida_DeveRetornarId()
 		{
@@ -42,6 +62,27 @@ namespace OA_Core.Tests.Service
 			//Assert
 			var result = await assinaturaService.AdicionarAssinaturaAsync(assinaturaRequest);
 			result.Should().NotBe(Guid.Empty);
+		}
+
+		[Fact(DisplayName = "Cria um Assinatura, quando já tem uma assinatura Existente")]
+		public async Task CriarAssinatura_Existente_DeveRetornarId()
+		{
+			//Arrange
+			var mockAssinaturaRepository = Substitute.For<IAssinaturaRepository>();
+			var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
+			var assinaturaService = new AssinaturaService(_mapper, mockAssinaturaRepository, MockUsuarioRepository, _notifier);
+			var usuario = _fixture.Create<Usuario>();
+
+			//Act
+			MockUsuarioRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(usuario);
+
+			mockAssinaturaRepository.AdicionarAsync(Arg.Any<Assinatura>()).Returns(Task.CompletedTask);
+
+			//Assert
+			var result = await assinaturaService.AdicionarAssinaturaAsync(_fixture.Create<AssinaturaRequest>());
+			result.Should().NotBe(Guid.Empty);
+
+
 		}
 
 		[Fact(DisplayName = "Cancela assinatura com sucesso")]
