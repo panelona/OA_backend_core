@@ -23,15 +23,20 @@ jobs:
       - name: Run tests
         run: dotnet test --no-build --verbosity normal
       - name: Test with coverage
-        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+        run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
       - name: Code Coverage Summary
         id: coverage-summary
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: 'coverage.cobertura.xml'
-          fail_below_min: true
-          format: 'markdown'
-          thresholds: '80 100'
+           filename: coverage/**/coverage.cobertura.xml
+           badge: true
+           fail_below_min: true
+           format: markdown
+           hide_branch_rate: false
+           hide_complexity: true
+           indicators: true
+           output: both
+           thresholds: '80 100'
       - name: Set coverage message
         run: |
           echo "::set-output name=coverage_message::${{ steps.coverage-summary.outputs.summary }}"
