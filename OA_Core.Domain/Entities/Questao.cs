@@ -1,7 +1,10 @@
 ﻿using OA_Core.Domain.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Domain.Entities
 {
+	//TODO: Implementar Testes Unitários
+	[ExcludeFromCodeCoverage]
 	public class Questao : Entidade
 	{
 		public string Enuciado { get; set; }

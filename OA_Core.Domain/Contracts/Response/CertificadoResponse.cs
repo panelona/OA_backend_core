@@ -1,5 +1,10 @@
-﻿namespace OA_Core.Domain.Contracts.Response
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace OA_Core.Domain.Contracts.Response
 {
+
+	//TODO: Implementar testes unitários
+	[ExcludeFromCodeCoverage]
 	public class CertificadoResponse : BaseResponse
 	{
 		public string Nome { get; set; }

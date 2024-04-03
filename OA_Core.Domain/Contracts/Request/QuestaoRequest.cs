@@ -1,7 +1,10 @@
 ﻿using OA_Core.Domain.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Domain.Contracts.Request
 {
+	[ExcludeFromCodeCoverage]
+	//TODO: Implementar testes unitários
 	public class QuestaoRequest
 	{
 		public string Enuciado { get; set; }

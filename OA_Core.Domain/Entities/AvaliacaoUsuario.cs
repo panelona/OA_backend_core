@@ -1,9 +1,12 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using OA_Core.Domain.Validations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Domain.Entities
 {
+	//TODO: Implementar Testes Unitários
+	[ExcludeFromCodeCoverage]
 	public class AvaliacaoUsuario
 	{
 		public AvaliacaoUsuario(Guid avaliacaoId,

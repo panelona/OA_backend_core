@@ -1,8 +1,10 @@
 ﻿using FluentValidation.Results;
 using OA_Core.Domain.Interfaces.Notifications;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Domain.Notifications
 {
+	[ExcludeFromCodeCoverage]
 	public class Notificador : INotificador
 	{
 		private List<Notificacao> _notificacoes;

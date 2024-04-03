@@ -1,7 +1,10 @@
 ﻿using OA_Core.Domain.Utils;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Domain.Contracts.Response
 {
+	//TODO: Implementar testes unitários
+	[ExcludeFromCodeCoverage]
 	public class AssinaturaResponse
 	{
 		public Guid Id { get; set; }

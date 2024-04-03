@@ -1,7 +1,9 @@
 ﻿using OA_Core.Domain.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OA_Core.Domain.Utils
 {
+	[ExcludeFromCodeCoverage]
 	public static class TextUtil
 	{
 		public static int GetStatusCode(this StatusException status)

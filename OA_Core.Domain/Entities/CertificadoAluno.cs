@@ -1,5 +1,9 @@
-﻿namespace OA_Core.Domain.Entities
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace OA_Core.Domain.Entities
 {
+	//TODO: Implementar testes unitários
+	[ExcludeFromCodeCoverage]
 	public class CertificadoAluno
 	{
 		public Guid CursoId { get; set; }
