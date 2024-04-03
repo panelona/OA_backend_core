@@ -2,10 +2,12 @@
 using OA_Core.Domain.Entities;
 using OA_Core.Domain.Interfaces.Repository;
 using OA_Core.Repository.Context;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 namespace OA_Core.Repository.Repositories
 {
+	[ExcludeFromCodeCoverage]
 	public class CursoProfessorRepository : BaseRepository<CursoProfessor>, ICursoProfessorRepository
 	{
 		private readonly CoreDbContext _context;

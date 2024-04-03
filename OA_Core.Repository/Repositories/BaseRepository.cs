@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OA_Core.Domain.Interfaces.Repository;
 using OA_Core.Repository.Context;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 namespace OA_Core.Repository.Repositories
 {
+	[ExcludeFromCodeCoverage]
 	public class BaseRepository<T> : IBaseRepository<T> where T : class
 	{
 		private readonly CoreDbContext _coreDbContext;

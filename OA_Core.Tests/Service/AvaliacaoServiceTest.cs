@@ -162,6 +162,24 @@ namespace OA_Core.Tests.Service
 			await Assert.ThrowsAsync<InformacaoException>(() => avaliacaoService.DeletarAvaliacaoAsync(Guid.NewGuid()));
 		}
 
+		//[Fact(DisplayName = "Fazer softdelete em uma avaliação já existente")]
+		//public async Task AvaliacaoService_DeletarAvaliacao_DeveFazerSoftDelete()
+		//{
+		//	//Arrange
+		//	var mockAvaliacaoRepository = Substitute.For<IAvaliacaoRepository>();
+		//	var MockUsuarioRepository = Substitute.For<IUsuarioRepository>();
+		//	var MockAvaliacaoUsuarioRepository = Substitute.For<IAvaliacaoUsuarioRepository>();
+		//	var avaliacaoService = new AvaliacaoService(mockAvaliacaoRepository, MockUsuarioRepository, _notifier, _mapper, MockAvaliacaoUsuarioRepository);
+		//	var avaliacao = _fixture.Create<Avaliacao>();
+
+		//	//Act
+		//	mockAvaliacaoRepository.ObterPorIdAsync(Arg.Any<Guid>()).Returns(avaliacao);
+		//	await avaliacaoService.DeletarAvaliacaoAsync(avaliacao.Id);
+
+		//	//Assert
+		//	await mockAvaliacaoRepository.Received().EditarAsync(Arg.Is<Avaliacao>(c => c.DataDelecao != null));
+		//}
+
 		[Fact(DisplayName = "Obtém todas as Avaliacoes")]
 		public async Task AvaliacaoService_ObterTodosAvaliacoes_DeveObter()
 		{
